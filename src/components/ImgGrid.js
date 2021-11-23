@@ -1,74 +1,49 @@
 import React from 'react'
-import styled from 'styled-components'
+import './block.scss'
 
-const Grid = styled.div`
-display: flex;
-  flex-wrap: wrap;
-`
-
-const Block = styled.div`
-display: block;
-  height: 150px;
-  line-height: 150px;
-  background: red;
-  color: white;
-  margin: 0 1rem 1rem 0;
-  text-align: center;
-  font-family: system-ui;
-  font-weight: 900;
-  font-size: 2rem;
-  flex: 1 0 auto;
-  border: 3px solid red;
-`
 function ImgGrid() {
     return (
-        <Grid>
-            <Block>
-                1
-            </Block>
-            <Block>
+        <div className="grid">
+            <div className="block">
+                <img src="https://via.placeholder.com/500" alt="placeholder" />
+            </div>
+            <div className="block">
                 2
-            </Block>
-            <Block>
+            </div>
+            <div className="block">
                 3
-            </Block>
-            <Block>
+            </div>
+            <div className="block">
                 4
-            </Block>
-            <Block>
+            </div>
+            <div className="block">
                 5
-            </Block>
-            <Block>
+            </div>
+            <div className="block">
                 6
-            </Block>
-            <Block>
+            </div>
+            <div className="block">
                 7
-            </Block>
-            <Block>
+            </div>
+            <div className="block">
                 8
-            </Block>
-            <Block>
+            </div>
+            <div className="block">
                 9
-            </Block>
-            <Block>
+            </div>
+            <div className="block">
                 10
-            </Block>
-            <Block>
+            </div>
+            <div className="block">
                 11
-            </Block>
-            <Block>
+            </div>
+            <div className="block">
                 12
-            </Block>
-            <Block>
-                13
-            </Block>
-            <Block>
-                14
-            </Block>
-            <Block>
-                15
-            </Block>
-        </Grid>
+            </div>
+            <div className="block">
+                12
+            </div>
+        </div>
     )
 }
 
