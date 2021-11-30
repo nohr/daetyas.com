@@ -1,20 +1,25 @@
 .grid {
+  overflow-y: scroll;
   display: flex;
+  max-height: 80%;
   margin: auto 20px;
   flex-wrap: wrap;
   gap: 1rem;
   .block {
     position: relative;
     overflow: hidden;
-    width: 0;
+    // width: 0;
     height: 250px;
     background: #ec985a;
-    color: white;
+    color: #ffffff;
     font-family: system-ui;
     font-weight: 900;
     font-size: 2rem;
-    flex: 1 0 auto;
+    flex: 2 0 auto;
     img {
+      min-width: 100%;
+      min-height: 100%;
+      max-width: 120%;
       position: absolute;
       pointer-events: none;
       top: 50%;
@@ -22,9 +27,9 @@
       transform: translate(-50%, -50%);
     }
   }
-  @for $i from 1 through 15 {
+  @for $i from 1 through 10 {
     div:nth-child(#{$i}) {
-      $h: (random(300) + 70) + px;
+      $h: (random(300) + 250) + px;
       width: $h;
     }
   }
