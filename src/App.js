@@ -3,13 +3,13 @@ import './App.css';
 import './block.scss'
 import styled from 'styled-components'
 import { GlobalStyle } from './components/theme';
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, NavLink } from 'react-router-dom';
 
 const Navbar = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-padding: 20px 0;
+padding: 10px 0;
 position: absolute;
 z-index: 300;
 top: 0;
@@ -24,23 +24,21 @@ align-items: center;
 gap: 30px;
 padding-right: 20px;
 `
-
-const Home = styled.p`
-font-size: 30px;
-padding-left: 20px;
-`
+// const Linker = styled(NavLink)`
+// text-decoration: none;
+// color: var(--main-text-color);
+// `
 
 function Nav() {
   return (
     <Navbar>
-      <Link to="/" style={{ fontSize: "30px", paddingLeft: "20px" }}>
+      <NavLink to="/" style={{ fontSize: "30px", paddingLeft: "20px", textDecoration: "none" }}>
         daetyas
-      </Link>
+      </NavLink>
       <Links>
-        <Link to="/music">music</Link>
-        <Link to="/photos">photos</Link>
-        <Link to="/about">about</Link>
-        <Link to="/contact">contact</Link>
+        <NavLink to="/music" style={({ isActive }) => ({ textDecoration: isActive ? "underline" : "none" })}>music</NavLink>
+        <NavLink to="/photos" style={({ isActive }) => ({ textDecoration: isActive ? "underline" : "none" })}>photos</NavLink>
+        <NavLink to="/info" style={({ isActive }) => ({ textDecoration: isActive ? "underline" : "none" })}>info</NavLink>
       </Links>
     </Navbar >
   )
@@ -53,11 +51,10 @@ function App() {
       <GlobalStyle />
       <Nav />
       <Routes>
-        <Route path="/" element={<Mixed />} />
+        <Route path="/" element={<Home />} />
         <Route path="/music" element={<Music />} />
         <Route path="/photos" element={<Photos />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/info" element={<Info />} />
       </Routes>
     </div>
   );
@@ -67,7 +64,7 @@ export default App;
 
 //PAGES
 // Home with entries from both Music and Photos
-function Mixed() {
+function Home() {
   return (
     <div>
       Home
@@ -151,10 +148,6 @@ function Photos() {
   )
 }
 
-function About() {
-  return ("about")
-}
-
-function Contact() {
-  return ("contact")
+function Info() {
+  return ("info")
 }
