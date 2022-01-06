@@ -123,11 +123,12 @@ const Grid = styled.div`
 
     p {
       opacity: 1 !important;
-  -webkit-user-drag: none;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+      -webkit-user-drag: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      margin: 20px;
     }
 
     img {
@@ -147,6 +148,15 @@ const Grid = styled.div`
   }
   .block:not(.active):hover > img {
   opacity: 0.1;
+  transition: var(--transition);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -o-transition: var(--transition);
+}
+
+.words:not(.active):hover > p{
+  /* color: var(--main-hover-color); */
+  opacity: 0.5 !important;
   transition: var(--transition);
   -webkit-transition: var(--transition);
   -moz-transition: var(--transition);
@@ -186,6 +196,7 @@ function Nav() {
       <Links>
         <NavLink to="/music" style={({ isActive }) => ({ backgroundColor: isActive ? "var(--main-text-color)" : null, color: isActive ? "var(--main-bg-color)" : null })}>music</NavLink>
         <NavLink to="/photos" style={({ isActive }) => ({ backgroundColor: isActive ? "var(--main-text-color)" : null, color: isActive ? "var(--main-bg-color)" : null })}>photos</NavLink>
+        <NavLink to="/words" style={({ isActive }) => ({ backgroundColor: isActive ? "var(--main-text-color)" : null, color: isActive ? "var(--main-bg-color)" : null })}>words</NavLink>
         <NavLink to="/info" style={({ isActive }) => ({ backgroundColor: isActive ? "var(--main-text-color)" : null, color: isActive ? "var(--main-bg-color)" : null })}>info</NavLink>
       </Links>
     </Navbar>
@@ -197,6 +208,14 @@ function Content(arg) {
   const snap = useSnapshot(state);
   const array = snap[arg.type];
   const gridRef = useRef(null);
+  // Scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+  scrollToTop();
 
   //Intersection Observer - run function when visible
   const callbackFunction = () => {
@@ -230,6 +249,7 @@ function Content(arg) {
 
 
   const shuffledBlocks = () => {
+
     const musicBlocks = snap.music.map((work) => (
       <NavLink to={`/music/${work.name}`} key={work.name} className="block">
         <p>{work.title}</p>
@@ -244,7 +264,13 @@ function Content(arg) {
       </NavLink>
     ));
 
-    const array = musicBlocks.concat(photosBlocks);
+    const wordsBlocks = snap.words.map((work) => (
+      <NavLink to={`/words/${work.name}`} key={work.name} className="block words">
+        <p>{work.statement}</p>
+      </NavLink>
+    ));
+
+    const array = musicBlocks.concat(photosBlocks).concat(wordsBlocks);
 
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -266,6 +292,20 @@ function Content(arg) {
         </Grid>
       </Container >
     )
+  } else if (arg.type === 'words') {
+    return (
+      <Container>
+        {arg.page && <Page page={arg.page} type={arg.type} />}
+        {/* {arg.arg && <Related />} */}
+        <Grid ref={gridRef}>
+          {array.map((work) => (
+            <NavLink to={`/words/${work.name}`} key={work.name} className="block words">
+              <p>{work.statement}</p>
+            </NavLink>
+          ))}
+        </Grid>
+      </Container >
+    )
   } else {
     return (
       <Container>
@@ -275,7 +315,7 @@ function Content(arg) {
           {array.map((work) => (
             <NavLink to={`/${arg.type}/${work.name}`} key={work.name} className="block">
               <p>{work.title}</p>
-              <img src={work.images[0]} key={Math.random()} alt="placeholder" />
+              {work.images && <img src={work.images[0]} key={Math.random()} alt="placeholder" />}
             </NavLink>
           ))}
         </Grid>
@@ -301,7 +341,7 @@ function Info() {
 const App = React.memo(function App() {
   GetContent(db);
   const snap = useSnapshot(state);
-  state.content = snap.music.concat(snap.photos);
+  state.content = snap.music.concat(snap.photos).concat(snap.words);
   return (
     <div className="App">
       <GlobalStyle />
@@ -310,10 +350,12 @@ const App = React.memo(function App() {
         <Route path="/" element={<Content type={'home'} page={null} />} />
         <Route path="/music" element={<Content type={'music'} page={null} />} />
         <Route path="/photos" element={<Content type={'photos'} page={null} />} />
+        <Route path="/words" element={<Content type={'words'} page={null} />} />
         {snap.content.map((doc) => (
           <React.Fragment key={Math.random()}>
             <Route path={`/music/${doc.name}`} element={<Content type={'music'} page={`${doc.name}`} />} />
             <Route path={`/photos/${doc.name}`} element={<Content type={'photos'} page={`${doc.name}`} />} />
+            <Route path={`/words/${doc.name}`} element={<Content type={'words'} page={`${doc.name}`} />} />
           </React.Fragment>
         ))}
         <Route path="/info" element={<Info />} />

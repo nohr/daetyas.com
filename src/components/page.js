@@ -4,16 +4,16 @@ import { state } from './state'
 import { useSnapshot } from 'valtio'
 
 const Selected = styled.div`
-  width: 100%;
-  height: 66.67vh !important;
-  display: flex;
-  position: static;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  border-bottom: solid 1px;
-  gap: 0;
+    width: 100%;
+    height: 66.67vh !important;
+    display: flex;
+    position: static;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    border-bottom: solid 1px;
+    gap: 0;
 `
 const ImgWrap = styled.div`
   height: 100%;
@@ -23,6 +23,11 @@ const ImgWrap = styled.div`
   align-items: center;
   gap: calc(var(--margin)/2);
   /* padding: calc(var(--margin)/2); */
+
+  &:only-child{
+    width: 100%;
+    height: auto;
+  }
 
   & *{
       height: 100%;
@@ -40,6 +45,31 @@ const TextWrap = styled.div`
 
     .title{
         font-size: 64px;
+    }
+`
+const Words = styled.div`
+    width: 100%;
+    height: 66.67vh !important;
+    display: flex;
+    position: static;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    border-bottom: solid 1px;
+    gap: 0;
+
+    .title{
+        font-size: 64px;
+    }
+    .DescWrap{
+        border-left: solid 1px;
+        border-top: none !important;
+        height: 100%;
+    }
+    .titleWrap{
+        width: 33.33% !important;
+        height: 100%;
     }
 `
 const TitleWrap = styled.div`
@@ -92,29 +122,48 @@ export function Related() {
 export function Page(prop) {
     const snap = useSnapshot(state);
     const page = snap[`${prop.type}`].filter(function (val) { return val.name === prop.page });
+    console.log(prop.type);
 
     if (page) {
-        return (
-            <>
-                {page.map((work) => (
-                    <Selected key={Math.random()} id='page'>
-                        <ImgWrap>
-                            {work.images.map((url) => (
-                                <img src={url} alt="placeholder" key={Math.random()} />
-                            ))}
-                        </ImgWrap>
-                        <TextWrap>
-                            <TitleWrap>
+        if (prop.type === 'words') {
+            return (
+                <>
+                    {page.map((work) => (
+                        <Words key={Math.random()} id='page'>
+                            <TitleWrap className='titleWrap'>
                                 <p className='title'>{work.title}</p>
                                 <p key={Math.random()}>{work.year}</p>
                             </TitleWrap>
                             <DescWrap className='DescWrap'>
                                 <p key={Math.random()}>{work.statement}</p>
                             </DescWrap>
-                        </TextWrap>
-                    </Selected>
-                ))}
-            </>
-        )
+                        </Words>
+                    ))}
+                </>
+            )
+        } else {
+            return (
+                <>
+                    {page.map((work) => (
+                        <Selected key={Math.random()} id='page'>
+                            {work.images && <ImgWrap>
+                                {work.images.map((url) => (
+                                    <img src={url} alt="placeholder" key={Math.random()} />
+                                ))}
+                            </ImgWrap>}
+                            <TextWrap>
+                                <TitleWrap className='titleWrap'>
+                                    <p className='title'>{work.title}</p>
+                                    <p key={Math.random()}>{work.year}</p>
+                                </TitleWrap>
+                                <DescWrap className='DescWrap'>
+                                    <p key={Math.random()}>{work.statement}</p>
+                                </DescWrap>
+                            </TextWrap>
+                        </Selected>
+                    ))}
+                </>
+            )
+        }
     }
 }
