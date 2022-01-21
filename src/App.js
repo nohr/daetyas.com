@@ -25,12 +25,12 @@ const Navbar = styled.div`
     border-bottom: solid var(--border-weight);
     border-color: var(--main-text-color);
     width: 66.67%;
-    line-height: 10px;
-    font-size: 30px;
+    /* line-height: 10px; */
+    font-size: 24px;
     /* border-right: solid var(--border-weight);
     border-color: var(--main-text-color); */
     padding: 0 20px;
-    padding-bottom: 6px;
+    /* padding-bottom: 6px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,6 +39,11 @@ const Navbar = styled.div`
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    
+    @media screen and (max-width : 768px) {
+      width: 20%;
+      font-size: 18px;
+    }
   }
 
   & .home:hover{
@@ -63,6 +68,10 @@ const Links = styled.div`
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+
+  @media screen and (max-width : 768px) {
+   width: 80%;
+  }
   
   & a{
     border-bottom: solid var(--border-weight) var(--main-text-color);
@@ -74,6 +83,11 @@ const Links = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 24px;
+
+    @media screen and (max-width : 768px) {
+      font-size: 18px;
+    }
   }
 
   & a:hover{
@@ -97,6 +111,13 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   font-size: 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
+  &::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+  }
 `
 const Grid = styled.div`
   columns: 3 200px;
@@ -104,7 +125,18 @@ const Grid = styled.div`
   column-rule: none;
   -webkit-columns: 3 200px;
   -webkit-column-gap: 0;
-  outline: solid var(--border-weight);
+  /* outline: solid var(--border-weight); */
+  animation: myAnim 10s ease-out 0s 1 normal;
+
+  @keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
 
   .active{
     opacity: 10%;
@@ -119,9 +151,10 @@ const Grid = styled.div`
     justify-content: center;
     width: 100%;
     margin-bottom: 0;
-    outline: var(--main-text-color) var(--border-weight) solid;
+    transition: calc(var(--transition) * 3);
 
     p {
+    font-size: 40px;
       opacity: 1 !important;
       -webkit-user-drag: none;
       user-select: none;
@@ -148,20 +181,59 @@ const Grid = styled.div`
   }
   .block:not(.active):hover > img {
   opacity: 0.1;
-  transition: var(--transition);
-  -webkit-transition: var(--transition);
-  -moz-transition: var(--transition);
-  -o-transition: var(--transition);
+    transition: calc(var(--transition) * 1.5);
 }
 
+//code to make text scroll loop up
+.words p {
+  animation: autoscroll 60s linear infinite;
+  pointer-events: none;
+  transition: 3s;
+}
+
+@keyframes autoscroll {
+  from { 
+    transform: translate3d(0,0,0);
+  }
+  to {
+    transform: translate3d(0,-90%,0);
+  }
+}
+.words{
+  border: var(--main-text-color) var(--border-weight) solid;
+  overflow: hidden;
+  /* height: inherit; */
+  display: block;
+}
+.words::-webkit-scrollbar{
+  display: none;
+}
 .words:not(.active):hover > p{
   /* color: var(--main-hover-color); */
-  opacity: 0.5 !important;
+  opacity: 0.1 !important;
   transition: var(--transition);
   -webkit-transition: var(--transition);
   -moz-transition: var(--transition);
   -o-transition: var(--transition);
 }
+`
+const InfoWrap = styled.div`
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 20px;
+  margin: auto 0;
+  
+  h1{
+    font-size: 24px;
+  }
+
+  a:hover{
+    color: var(--main-hover-color);
+    transition: var(--transition);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -o-transition: var(--transition);
+  }
 `
 const Footer = styled.a`
   position: fixed;
@@ -188,6 +260,7 @@ const Footer = styled.a`
   -o-transition: var(--transition);
   }
 `
+
 //COMPONENTS
 function Nav() {
   return (
@@ -328,11 +401,27 @@ function Info() {
   const snap = useSnapshot(state);
   return (
     <Container>
-      <div>
-        {snap.info.map((data) => (
-          <p key={Math.random()}>{data.about}</p>
-        ))}
-      </div>
+      <InfoWrap>
+        <div style={{ width: "min-content", justifySelf: "flex-end", paddingRight: "20%" }}>
+          {snap.info.map((data) => (
+            <img key={Math.random()} src={data.photo} alt='photo' />
+          ))}
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "5%", width: "50%", justifyContent: "space-around" }}>
+          <div>
+            <h1>About</h1>
+            {snap.info.map((data) => (
+              <p key={Math.random()}>{data.about}</p>
+            ))}
+          </div>
+          <div>
+            <h1>Email</h1>
+            {snap.info.map((data) => (
+              <a key={Math.random()} href={`mailto ${data.email}`}>{data.email}</a>
+            ))}
+          </div>
+        </div>
+      </InfoWrap>
     </Container>
   )
 }

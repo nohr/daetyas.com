@@ -5,37 +5,51 @@ import { useSnapshot } from 'valtio'
 
 const Selected = styled.div`
     width: 100%;
-    height: 66.67vh !important;
-    display: flex;
-    position: static;
+    /* height: 50% !important; */
+    /* height: fit-content; */
+    /* position: static; */
     align-items: center;
     justify-content: space-between;
-    flex-wrap: nowrap;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 66.67% 33.33%;
+    grid-template-rows: 100%;
     border-bottom: solid 1px;
     gap: 0;
+
+    @media screen and (max-width : 768px) {
+        grid-template-rows: 66.67% 33.33%;
+        grid-template-columns: 100%;
+    }
 `
 const ImgWrap = styled.div`
   height: 100%;
-  width: 66.67%;
+  /* width: 66.67%; */
   overflow-y: scroll;
   display: flex;
   align-items: center;
   gap: calc(var(--margin)/2);
   /* padding: calc(var(--margin)/2); */
+  overflow-y: hidden;
 
-  &:only-child{
-    width: 100%;
-    height: auto;
+  & *:only-child{
+    /* width: 100%;
+    height: auto; */
+    margin: 0 auto;
   }
 
   & *{
-      height: 100%;
+      height: 40vw;
       width: auto;
+      
+    @media screen and (max-width : 768px) {
+        height: 50vw;
+    }
   }
+
+    
 `
 const TextWrap = styled.div`
-    width: 33.33%;
+    /* width: 33.33%; */
     height: 100%;
     border-left: solid 1px;
     display: flex;
@@ -43,19 +57,26 @@ const TextWrap = styled.div`
     align-content: center;
     justify-content: space-between;
 
+    @media screen and (max-width : 768px) {
+          border-top: solid 1px;
+        }
+
     .title{
         font-size: 64px;
+        @media screen and (max-width : 768px) {
+          font-size: 24px;
+        }
     }
 `
 const Words = styled.div`
     width: 100%;
-    height: 66.67vh !important;
-    display: flex;
-    position: static;
-    align-items: center;
+    /* height: 66.67vh !important; */
+    height: 50%;
+    /* position: static; */
+    /* align-items: center; */
     justify-content: space-between;
-    flex-wrap: nowrap;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 33.33% 66.67%;
     border-bottom: solid 1px;
     gap: 0;
 
@@ -66,10 +87,20 @@ const Words = styled.div`
         border-left: solid 1px;
         border-top: none !important;
         height: 100%;
+        display: flex;
+        align-items: flex-start;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            
+        &::-webkit-scrollbar{
+          width: 0;
+          height: 0;
+        }
     }
-    .titleWrap{
-        width: 33.33% !important;
-        height: 100%;
+    .DescWrap p{
+        width: 50%;
+        margin: 0 auto;
+        line-height: 40px;
     }
 `
 const TitleWrap = styled.div`
@@ -86,6 +117,10 @@ const TitleWrap = styled.div`
         word-break: break-word;
         height: 75%;
     }
+    &::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+  }
 `
 const DescWrap = styled.div`
     overflow-y: scroll;
@@ -119,10 +154,10 @@ export function Related() {
         </Backdrop>
     )
 }
+
 export function Page(prop) {
     const snap = useSnapshot(state);
     const page = snap[`${prop.type}`].filter(function (val) { return val.name === prop.page });
-    console.log(prop.type);
 
     if (page) {
         if (prop.type === 'words') {
