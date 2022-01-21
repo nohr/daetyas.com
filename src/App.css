@@ -44,6 +44,12 @@ body {
   border-right: 1px solid; */
 }
 
+@media screen and (max-width: 768px) {
+  .App {
+    margin: 0 0 var(--margin) 0;
+  }
+}
+
 a {
   color: var(--main-text-color);
   text-decoration: none;

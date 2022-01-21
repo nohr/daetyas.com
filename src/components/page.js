@@ -17,8 +17,9 @@ const Selected = styled.div`
     gap: 0;
 
     @media screen and (max-width : 768px) {
-        grid-template-rows: 66.67% 33.33%;
+        grid-template-rows: 1fr 1fr 1fr;
         grid-template-columns: 100%;
+        height: 100%;
     }
 `
 const ImgWrap = styled.div`
@@ -127,6 +128,10 @@ const DescWrap = styled.div`
     height: 50%;
     border-top: solid 1px;
     padding: calc(var(--margin)/2); 
+
+    @media screen and (max-width : 768px) {
+        height: 100%;
+    }
 
     p{
         text-indent: 20px;

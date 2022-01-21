@@ -16,9 +16,15 @@ const Navbar = styled.div`
   position: fixed;
   z-index: 300;
   top: 0;
-  width: calc(100vw - calc(var(--margin)*2));
-  height: var(--margin);
   background-color: var(--main-bg-color);
+  height: var(--margin);
+  width: calc(100vw - calc(var(--margin)*2));
+ 
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    top: unset;
+    bottom: 0;
+  }
 
   & .home{
     border-top: solid var(--border-weight);
@@ -127,6 +133,10 @@ const Grid = styled.div`
   -webkit-column-gap: 0;
   /* outline: solid var(--border-weight); */
   animation: myAnim 10s ease-out 0s 1 normal;
+  
+  @media screen and (max-width : 768px) {
+    margin-bottom: var(--margin);
+  }
 
   @keyframes fadeIn {
   0% {
@@ -184,6 +194,7 @@ const Grid = styled.div`
     transition: calc(var(--transition) * 1.5);
 }
 
+
 //code to make text scroll loop up
 .words p {
   animation: autoscroll 60s linear infinite;
@@ -201,9 +212,13 @@ const Grid = styled.div`
 }
 .words{
   border: var(--main-text-color) var(--border-weight) solid;
-  overflow: hidden;
+  overflow-y: scroll;
   /* height: inherit; */
   display: block;
+
+  @media screen and (max-width : 768px) {
+   overflow: hidden;
+  }
 }
 .words::-webkit-scrollbar{
   display: none;
@@ -249,6 +264,12 @@ const Footer = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  @media screen and (max-width : 768px) {
+   width: 100%;
+   bottom: unset;
+   top: 0;
+  }
   
   &:hover{
     border-color: var(--main-hover-color);
