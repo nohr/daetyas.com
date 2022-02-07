@@ -16,25 +16,21 @@ const Selected = styled.div`
     border-bottom: solid 1px;
     gap: 0;
 
-    @media screen and (max-width : 768px) {
-        grid-template-rows: 1fr 1fr 1fr;
+    @media screen and (max-width : 900px) {
+        grid-template-rows: 1fr 1fr;
         grid-template-columns: 100%;
-        height: 100%;
+        height: 125vh;
     }
 `
 const ImgWrap = styled.div`
   height: 100%;
-  /* width: 66.67%; */
   overflow-y: scroll;
   display: flex;
   align-items: center;
   gap: calc(var(--margin)/2);
-  /* padding: calc(var(--margin)/2); */
   overflow-y: hidden;
 
   & *:only-child{
-    /* width: 100%;
-    height: auto; */
     margin: 0 auto;
   }
 
@@ -42,15 +38,15 @@ const ImgWrap = styled.div`
       height: 40vw;
       width: auto;
       
-    @media screen and (max-width : 768px) {
-        height: 50vw;
+    @media screen and (max-width : 900px) {
+        width: 95vw;
+        height: auto;
     }
   }
 
     
 `
 const TextWrap = styled.div`
-    /* width: 33.33%; */
     height: 100%;
     border-left: solid 1px;
     display: flex;
@@ -58,13 +54,18 @@ const TextWrap = styled.div`
     align-content: center;
     justify-content: space-between;
 
-    @media screen and (max-width : 768px) {
-          border-top: solid 1px;
-        }
+    @media screen and (max-width : 900px) {
+        border-top: solid 1px;
+        border-right: solid 1px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 20% 80%;
+
+    }
 
     .title{
         font-size: 64px;
-        @media screen and (max-width : 768px) {
+        @media screen and (max-width : 900px) {
           font-size: 24px;
         }
     }
@@ -80,9 +81,21 @@ const Words = styled.div`
     grid-template-columns: 33.33% 66.67%;
     border-bottom: solid 1px;
     gap: 0;
+    
+    @media screen and (max-width : 900px) {
+        grid-template-rows: 20% 80%;
+        grid-template-columns: 1fr;
+        height: 80%;
+        a:hover{
+            
+        }
+    }
 
     .title{
         font-size: 64px;
+        @media screen and (max-width : 900px) {
+          font-size: 24px;
+        }
     }
     .DescWrap{
         border-left: solid 1px;
@@ -92,6 +105,11 @@ const Words = styled.div`
         align-items: flex-start;
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        @media screen and (max-width : 900px) {
+           border-left: none;
+            border-top: solid 1px;
+            padding-top: 0;
+        }
             
         &::-webkit-scrollbar{
           width: 0;
@@ -102,6 +120,10 @@ const Words = styled.div`
         width: 50%;
         margin: 0 auto;
         line-height: 40px;
+        @media screen and (max-width : 900px) {
+            margin: 0;
+            width: 100%;
+        }
     }
 `
 const TitleWrap = styled.div`
@@ -114,9 +136,19 @@ const TitleWrap = styled.div`
     justify-content: flex-start;
     overflow-y: scroll;
 
+    @media screen and (max-width : 900px) {
+        height: 100%;
+        border-bottom: solid 1px;
+    }
+
     &:first-child{
         word-break: break-word;
         height: 75%;
+        border-bottom: none;
+
+        @media screen and (max-width : 900px) {
+        height: 100%;
+        }
     }
     &::-webkit-scrollbar{
     width: 0;
@@ -129,7 +161,7 @@ const DescWrap = styled.div`
     border-top: solid 1px;
     padding: calc(var(--margin)/2); 
 
-    @media screen and (max-width : 768px) {
+    @media screen and (max-width : 900px) {
         height: 100%;
     }
 

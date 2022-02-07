@@ -20,7 +20,7 @@ const Navbar = styled.div`
   height: var(--margin);
   width: calc(100vw - calc(var(--margin)*2));
  
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     width: 100%;
     top: unset;
     bottom: 0;
@@ -46,7 +46,7 @@ const Navbar = styled.div`
     -webkit-user-select: none;
     -ms-user-select: none;
     
-    @media screen and (max-width : 768px) {
+    @media screen and (max-width : 900px) {
       width: 20%;
       font-size: 18px;
     }
@@ -75,7 +75,7 @@ const Links = styled.div`
   -webkit-user-select: none;
   -ms-user-select: none;
 
-  @media screen and (max-width : 768px) {
+  @media screen and (max-width : 900px) {
    width: 80%;
   }
   
@@ -91,7 +91,7 @@ const Links = styled.div`
     align-items: center;
     font-size: 24px;
 
-    @media screen and (max-width : 768px) {
+    @media screen and (max-width : 900px) {
       font-size: 18px;
     }
   }
@@ -120,6 +120,12 @@ const Container = styled.div`
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
 
+  @media screen and (max-width : 900px) {
+     
+  border-left: none;
+  border-right: none;
+    }
+
   &::-webkit-scrollbar{
     width: 0;
     height: 0;
@@ -134,7 +140,7 @@ const Grid = styled.div`
   /* outline: solid var(--border-weight); */
   animation: myAnim 10s ease-out 0s 1 normal;
   
-  @media screen and (max-width : 768px) {
+  @media screen and (max-width : 900px) {
     margin-bottom: var(--margin);
   }
 
@@ -216,9 +222,9 @@ const Grid = styled.div`
   /* height: inherit; */
   display: block;
 
-  @media screen and (max-width : 768px) {
-   overflow: hidden;
-  }
+  @media screen and (max-width : 900px) {
+     overflow: hidden;
+   }
 }
 .words::-webkit-scrollbar{
   display: none;
@@ -230,14 +236,63 @@ const Grid = styled.div`
   -webkit-transition: var(--transition);
   -moz-transition: var(--transition);
   -o-transition: var(--transition);
+  @media screen and (max-width : 900px) {
+    opacity: 1 !important;
+    transition: var(--transition);
+   }
 }
 `
 const InfoWrap = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
+   grid-template-rows: 1fr;
   padding: 20px;
   margin: auto 0;
+  width: 100%;
+
+  @media screen and (max-width : 900px) {
+  border-left: solid var(--border-weight);
+  border-right: solid var(--border-weight);
+   grid-template-rows: 35% 65%;
+   grid-template-columns: 100%;
+   /* display: flex;
+   flex-direction: column; */
+    gap: 20vh;
+    margin: 0;
+  height: 125vh;
+  }
   
+  .InfoText{
+    display: "flex"; 
+    flex-direction: "column"; 
+    gap: "5px"; 
+    width: "50%"; 
+    justify-content: "space-around";
+    height: min-content;
+
+    @media screen and (max-width : 900px) {
+    width: "unset";
+      h1{
+        padding-bottom: 5px;
+      }
+      p{
+        text-indent: 20px;
+      }
+    }  
+  }
+  
+  .InfoPic{
+     width: "min-content"; 
+     justify-self: "flex-end"; 
+     margin: 0 auto;
+     display: block;
+    @media screen and (max-width : 900px) {
+     padding-bottom: 10%;
+     height: min-content;
+    } 
+  }
+
+
   h1{
     font-size: 24px;
   }
@@ -265,7 +320,7 @@ const Footer = styled.a`
   justify-content: center;
   align-items: center;
   
-  @media screen and (max-width : 768px) {
+  @media screen and (max-width : 900px) {
    width: 100%;
    bottom: unset;
    top: 0;
@@ -423,13 +478,13 @@ function Info() {
   return (
     <Container>
       <InfoWrap>
-        <div style={{ width: "min-content", justifySelf: "flex-end", paddingRight: "20%" }}>
+        <div className='InfoPic'>
           {snap.info.map((data) => (
-            <img key={Math.random()} src={data.photo} alt='photo' />
+            <img key={Math.random()} src={data.photo} alt='self' />
           ))}
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "5%", width: "50%", justifyContent: "space-around" }}>
-          <div>
+        <div className='InfoText'>
+          <div style={{ paddingBottom: "30px" }}>
             <h1>About</h1>
             {snap.info.map((data) => (
               <p key={Math.random()}>{data.about}</p>
