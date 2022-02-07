@@ -121,10 +121,10 @@ const Container = styled.div`
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
 
   @media screen and (max-width : 900px) {
-     
-  border-left: none;
-  border-right: none;
-    }
+  font-size: 0;
+    border-left: none;
+    border-right: none;
+  }
 
   &::-webkit-scrollbar{
     width: 0;
@@ -141,7 +141,9 @@ const Grid = styled.div`
   animation: myAnim 10s ease-out 0s 1 normal;
   
   @media screen and (max-width : 900px) {
-    margin-bottom: var(--margin);
+    columns: 2 100px;
+    -webkit-columns: 2 100px;
+    padding-bottom: var(--margin) !important;
   }
 
   @keyframes fadeIn {
@@ -168,9 +170,20 @@ const Grid = styled.div`
     width: 100%;
     margin-bottom: 0;
     transition: calc(var(--transition) * 3);
+  
+    @media screen and (max-width : 900px) {
+        /* width: 50%; */
+        /* height: auto; */
+        padding: 5px;
+
+        p{
+          font-size: 24px !important;
+          margin: 0 auto !important;
+        }
+    }
 
     p {
-    font-size: 40px;
+      font-size: 40px;
       opacity: 1 !important;
       -webkit-user-drag: none;
       user-select: none;
@@ -178,6 +191,7 @@ const Grid = styled.div`
       -webkit-user-select: none;
       -ms-user-select: none;
       margin: 20px;
+      text-indent: 20px;
     }
 
     img {
@@ -220,7 +234,7 @@ const Grid = styled.div`
   border: var(--main-text-color) var(--border-weight) solid;
   overflow-y: scroll;
   /* height: inherit; */
-  display: block;
+  display: inline-block;
 
   @media screen and (max-width : 900px) {
      overflow: hidden;
@@ -230,7 +244,6 @@ const Grid = styled.div`
   display: none;
 }
 .words:not(.active):hover > p{
-  /* color: var(--main-hover-color); */
   opacity: 0.1 !important;
   transition: var(--transition);
   -webkit-transition: var(--transition);

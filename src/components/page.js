@@ -39,8 +39,8 @@ const ImgWrap = styled.div`
       width: auto;
       
     @media screen and (max-width : 900px) {
-        width: 95vw;
-        height: auto;
+        height: 40vh;
+        /* height: auto; */
     }
   }
 
@@ -106,8 +106,9 @@ const Words = styled.div`
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none;  /* Internet Explorer 10+ */
         @media screen and (max-width : 900px) {
-           border-left: none;
-            border-top: solid 1px;
+            border-left: solid 1px;
+            border-right: solid 1px;
+            border-top: solid 1px !important;
             padding-top: 0;
         }
             
@@ -139,6 +140,8 @@ const TitleWrap = styled.div`
     @media screen and (max-width : 900px) {
         height: 100%;
         border-bottom: solid 1px;
+        border-left: solid 1px;
+        border-right: solid 1px;
     }
 
     &:first-child{
