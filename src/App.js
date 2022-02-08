@@ -112,8 +112,8 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   margin-top: var(--margin);
-  border-left: solid var(--border-weight);
-  border-right: solid var(--border-weight);
+  /* border-left: solid var(--border-weight);
+  border-right: solid var(--border-weight); */
   width: 100%;
   height: 100%;
   font-size: 0;
