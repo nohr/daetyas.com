@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import '../App.css'
 import { state } from './state'
 import { useSnapshot } from 'valtio'
+import ReactPlayer from 'react-player'
 
 const Selected = styled.div`
     width: 100%;
@@ -42,9 +43,19 @@ const ImgWrap = styled.div`
         height: 40vh;
         /* height: auto; */
     }
-  }
+  }    
+`
+const MusicWrap = styled.div`
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--margin)/2);
+  overflow-y: hidden;
 
-    
+  & *:only-child{
+    margin: 0 auto;
+  } 
 `
 const TextWrap = styled.div`
     height: 100%;
@@ -213,6 +224,27 @@ export function Page(prop) {
                                 <p key={Math.random()}>{work.statement}</p>
                             </DescWrap>
                         </Words>
+                    ))}
+                </>
+            )
+        } else if (prop.type === 'music') {
+            return (
+                <>
+                    {page.map((work) => (
+                        <Selected key={Math.random()} id='page'>
+                            {work.link && <MusicWrap>
+                                <ReactPlayer url={work.link} />
+                            </MusicWrap>}
+                            <TextWrap>
+                                <TitleWrap className='titleWrap'>
+                                    <p className='title'>{work.title}</p>
+                                    <p key={Math.random()}>{work.year}</p>
+                                </TitleWrap>
+                                <DescWrap className='DescWrap'>
+                                    <p key={Math.random()}>{work.statement}</p>
+                                </DescWrap>
+                            </TextWrap>
+                        </Selected>
                     ))}
                 </>
             )
