@@ -129,8 +129,6 @@ const Words = styled.div`
         }
     }
     .DescWrap p{
-        width: 50%;
-        margin: 0 auto;
         line-height: 40px;
         @media screen and (max-width : 900px) {
             margin: 0;

@@ -6,7 +6,7 @@ import { Route, Routes, NavLink } from 'react-router-dom'
 import { Page } from './components/page'
 import { state } from './components/state'
 import { useSnapshot } from 'valtio'
-import { db, GetContent } from './firebase'
+import { db, GetContent } from './index'
 
 // STYLING
 const Navbar = styled.div`
@@ -434,11 +434,14 @@ function Content(arg) {
 
     const array = musicBlocks.concat(photosBlocks).concat(wordsBlocks);
 
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
+    // randomize items
+    if (arg.type !== "home") {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
     }
     return array;
   }
