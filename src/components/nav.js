@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { Links, Navbar } from "./nav.style";
 
-export function Nav() {
+export function Nav({ header }) {
   return (
-    <Navbar>
+    <Navbar ref={header}>
       <NavLink to="/" className="home">
         {" "}
         daetyas{" "}

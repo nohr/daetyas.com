@@ -8,24 +8,18 @@ export function Info() {
     <Container>
       <InfoWrap>
         <div className="InfoPic">
-          {snap.info.map((data) => (
-            <img key={Math.random()} src={data.photo} alt="self" />
-          ))}
+          <img src={snap.photo} alt="self" />
         </div>
         <div className="InfoText">
           <div style={{ paddingBottom: "30px" }}>
             <h1>About</h1>
-            {snap.info.map((data) => (
-              <p key={Math.random()}>{data.about}</p>
-            ))}
+              <p>{snap.about}</p>
           </div>
           <div>
             <h1>Email</h1>
-            {snap.info.map((data) => (
-              <a key={Math.random()} href={`mailto ${data.email}`}>
-                {data.email}
+              <a href={`mailto: ${snap.email}`}>
+                {snap.email}
               </a>
-            ))}
           </div>
         </div>
       </InfoWrap>
