@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore} from "firebase/firestore/lite";
 
 const firebaseConfig = {
-  apiKey: "${{ secrets.FIREBASE_DAETYAS_C1255_APIKEY5 }}",
+  apiKey: "AIzaSyBjNYt6ZwuLyP1BLhun8a-rzf0ho_I1Bp0",
   authDomain: "daetyas-c1255.firebaseapp.com",
   projectId: "daetyas-c1255",
   storageBucket: "daetyas-c1255.appspot.com",

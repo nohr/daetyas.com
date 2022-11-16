@@ -1,8 +1,9 @@
 import { collection, getDocs } from "firebase/firestore/lite";
-import { state } from "./components/state";
+import { state } from "../state";
+import { db } from "./API";
 
 // Get info and content  from database
-export async function GetContent(db) {
+export async function GetContent() {
   const musicCol = collection(db, "music");
   const photosCol = collection(db, "photos");
   const wordsCol = collection(db, "words");
