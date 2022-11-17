@@ -158,14 +158,13 @@ export const InfoWrap = styled.div`
   @media screen and (max-width: 900px) {
     border-left: solid var(--border-weight);
     border-right: solid var(--border-weight);
-    grid-template-rows: 35% 65%;
-    grid-template-columns: 100%;
-    /* display: flex;
-   flex-direction: column; */
-    gap: 20vh;
+    /* grid-template-rows: 35% 65%;
+    grid-template-columns: 100%; */
+    display: flex;
+    flex-direction: column;
+    /* gap: 20vh; */
     margin: 0;
-    height: 125vh;
-    margin-bottom: var(--margin);
+    overflow-y: scroll;
   }
 
   .InfoText {
@@ -178,6 +177,7 @@ export const InfoWrap = styled.div`
 
     @media screen and (max-width: 900px) {
       width: unset;
+      padding-bottom: calc(var(--margin) * 2);
       h1 {
         padding-bottom: 5px;
       }
@@ -198,7 +198,7 @@ export const InfoWrap = styled.div`
     }
     @media screen and (max-width: 900px) {
       padding-bottom: 10%;
-      height: min-content;
+      height: min-content !important;
       img {
         width: 100%;
       }
