@@ -8,7 +8,7 @@ export const Container = styled.div`
   /* border-left: solid var(--border-weight);
   border-right: solid var(--border-weight); */
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   font-size: 0;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -165,18 +165,19 @@ export const InfoWrap = styled.div`
     gap: 20vh;
     margin: 0;
     height: 125vh;
+    margin-bottom: var(--margin);
   }
 
   .InfoText {
-    display: "flex";
-    flex-direction: "column";
-    gap: "5px";
-    width: "50%";
-    justify-content: "space-around";
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 50%;
+    justify-content: space-around;
     height: min-content;
 
     @media screen and (max-width: 900px) {
-      width: "unset";
+      width: unset;
       h1 {
         padding-bottom: 5px;
       }
@@ -187,13 +188,20 @@ export const InfoWrap = styled.div`
   }
 
   .InfoPic {
-    width: "min-content";
-    justify-self: "flex-end";
+    height: auto;
+    justify-self: flex-end;
     margin: 0 auto;
     display: block;
+
+    img {
+      width: 480px;
+    }
     @media screen and (max-width: 900px) {
       padding-bottom: 10%;
       height: min-content;
+      img {
+        width: 100%;
+      }
     }
   }
 

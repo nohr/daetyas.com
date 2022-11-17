@@ -3,7 +3,7 @@ import { uploadData } from "./Firebase/Firebase.service";
 // convert firebase timestamp to date
 export const convertDate = (timestamp) => {
   const date = new Date(timestamp.seconds * 1000);
-  return date.toLocaleDateString();
+  return date.getFullYear();
 };
 
 export function clearSelectedName(

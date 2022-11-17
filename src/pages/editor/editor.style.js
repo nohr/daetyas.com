@@ -21,12 +21,14 @@ export const ContentPage = styled.div`
     width: 100%;
     justify-content: center;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 900px) {
       flex-direction: column;
       padding: 10px;
     }
   }
   .about-form {
+    background-color: var(--main-bg-color) !important;
+    padding: 20px;
     width: 65ch;
     display: flex;
     flex-direction: column;
@@ -36,7 +38,7 @@ export const ContentPage = styled.div`
       height: 30vh;
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 900px) {
       width: 100%;
       height: 100%;
 
@@ -47,10 +49,11 @@ export const ContentPage = styled.div`
   }
 
   .formWrap {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 900px) {
       width: 100%;
+      margin-bottom: calc((var(--margin) * 3));
     }
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 900px) {
       resize: horizontal;
       overflow-y: scroll;
       padding: 15px 0 15px 15px;
@@ -61,15 +64,16 @@ export const ContentPage = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     row-gap: 20px;
-    background-color: var(--main-bg-color);
+    background-color: var(--main-hover-color-alpha);
   }
   form {
-    @media screen and (max-width: 768px) {
+    background-color: var(--main-bg-color) !important;
+
+    @media screen and (max-width: 900px) {
       justify-content: space-evenly;
-      padding-bottom: 60px;
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 900px) {
       justify-content: flex-start;
       padding: 15px;
     }
@@ -108,7 +112,7 @@ export const ContentPage = styled.div`
     border: 1px solid var(--main-hover-color);
     color: 1px solid var(--main-hover-color);
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 900px) {
       width: 100%;
     }
   }
@@ -118,7 +122,7 @@ export const ContentPage = styled.div`
   textarea {
     resize: vertical;
     height: 120px;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 900px) {
       height: 80px;
     }
   }
@@ -139,6 +143,7 @@ export const ContentPage = styled.div`
     &:hover {
       opacity: 50%;
       background-color: var(--main-hover-color-alpha) !important;
+      color: var(--main-text-color) !important;
     }
   }
 
@@ -204,7 +209,7 @@ export const ContentPage = styled.div`
     iframe {
       height: 70vh;
     }
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 900px) {
       img,
       video,
       iframe {

@@ -9,6 +9,7 @@ import {
   query,
   setDoc,
   Timestamp,
+  where,
 } from "firebase/firestore/lite";
 import {
   deleteObject,
@@ -37,6 +38,7 @@ export async function handleAddContent(
   let newContent = [];
   // handle uploading multiple files with an ordered id
   for (let file of selectedFiles) {
+    console.log(file);
     // check file size
     if (file.size > 5242880) {
       alert("File size is too large. Please upload a file less than 5MB.");
@@ -220,38 +222,75 @@ export async function uploadData(
   );
 }
 
-export async function handleGetAbout() {
-  const docRef = doc(db, "info", "About");
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    state.about = docSnap.data().text;
-    state.email = docSnap.data().email;
-    state.photo = docSnap.data().photo;
-  } else {
-    console.log("No such document!");
+export async function handleGetAbout(arg) {
+  const about = await getDoc(doc(db, "info", "About"));
+
+  if (about.exists()) {
+    return about.data()[arg];
   }
 }
 
-export async function uploadAbout() {
-  await setDoc(
+export function uploadAbout(file, snap) {
+  // update the firestore doc
+  if (file !== "") {
+    // delete the folder
+    listAll(ref(storage, `info/About`)).then((res) => {
+      res.items.forEach((itemRef) => {
+        deleteObject(itemRef);
+      });
+    });
+
+    const storageRef = ref(storage, `info/About/${file.name}`);
+    // upload the file
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // calculate the upload progress
+        console.log(
+          Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+        );
+      },
+      (error) => {
+        // catch errors
+        console.log(error);
+      },
+      () => {
+        // get the download url of the resized img when complete
+        getDownloadURL(storageRef).then((downloadURL) => {
+          // update the firestore doc
+          setDoc(
+            doc(db, "info", "About"),
+            {
+              photo: downloadURL,
+            },
+            { merge: true }
+          );
+        });
+      }
+    );
+  }
+
+  setDoc(
     doc(db, "info", "About"),
     {
-      text: state.about,
-      email: state.email,
+      text: snap.about,
+      email: snap.email,
     },
     { merge: true }
   );
 }
 
-export async function handleGetData() {
+export async function handleGetData(arg) {
   const data = await getDocs(
     query(
       collection(db, "projects"),
-      // where("published", "==", true),
+      where("category", "==", arg),
       orderBy("date", "desc")
     )
   );
-  state.data = data.docs.map((doc) => doc.data());
+
+  return data.docs.map((doc) => doc.data());
 }
 
 export async function handleGetCategories() {
@@ -262,8 +301,9 @@ export async function handleGetCategories() {
       orderBy("date", "desc")
     )
   );
-  state.categories = [...new Set(data.docs.map((doc) => doc.data().category))];
-  state.categories.sort();
+  state.categories = [
+    ...new Set(data.docs.map((doc) => doc.data().category)),
+  ].sort();
 }
 
 export async function handleGetProjectData(name, setContent) {

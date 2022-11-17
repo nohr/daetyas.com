@@ -19,8 +19,9 @@ export default function Editor({ user, marginTop }) {
         <ContentPage style={{ marginTop: marginTop, paddingBottom: "60px" }}>
           <h1>Editor</h1>
           <button style={{ width: "unset" }} onClick={() => setEditor(!editor)}>
-            {!editor ? "Edit About" : "Edit Projects"}
+            {!editor ? "Edit Info" : "Edit Projects"}
           </button>
+          <br />
           <div className="dash">
             {!editor ? (
               <Form
@@ -36,7 +37,7 @@ export default function Editor({ user, marginTop }) {
               />
             ) : (
               <AboutForm />
-            )}{" "}
+            )}
           </div>
         </ContentPage>
       ) : (

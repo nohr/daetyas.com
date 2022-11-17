@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Navbar = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   position: fixed;
   z-index: 300;
   top: 0;
@@ -12,16 +11,37 @@ export const Navbar = styled.div`
   width: calc(100vw - calc(var(--margin) * 2));
 
   @media screen and (max-width: 900px) {
+    flex-direction: column;
+    height: calc(2 * var(--margin));
     width: 100%;
     top: unset;
     bottom: 0;
+
+    .auth {
+      width: 100% !important;
+      & * {
+        border-bottom: none !important;
+      }
+    }
   }
+
+  .auth {
+    width: min-content;
+  }
+`;
+
+export const Constant = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: var(--margin);
 
   & .home {
     border-top: solid var(--border-weight);
     border-bottom: solid var(--border-weight);
     border-color: var(--main-text-color);
-    width: 66.67%;
+    width: ${(props) => props.width};
     /* line-height: 10px; */
     font-size: 24px;
     /* border-right: solid var(--border-weight);
@@ -54,6 +74,7 @@ export const Navbar = styled.div`
   }
 `;
 export const Links = styled.div`
+  height: var(--margin);
   width: 33.33%;
   cursor: pointer;
   display: flex;
@@ -70,7 +91,8 @@ export const Links = styled.div`
     width: 80%;
   }
 
-  & a {
+  & a,
+  & .link {
     border-bottom: solid var(--border-weight) var(--main-text-color);
     border-top: solid var(--border-weight) var(--main-text-color);
     border-left: solid var(--border-weight) var(--main-text-color);
@@ -80,14 +102,24 @@ export const Links = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 20px;
+    padding: 0 10px;
 
     @media screen and (max-width: 900px) {
       font-size: 18px;
     }
   }
 
-  & a:hover {
+  & .link {
+    width: fit-content;
+    white-space: nowrap;
+    border-right: solid var(--border-weight) var(--main-text-color);
+    background-color: var(--red);
+    color: var(--main-bg-color);
+    border-color: var(--main-bg-color);
+  }
+  & a:hover,
+  & .link:hover {
     border-right: solid var(--border-weight) var(--main-text-color);
     border-color: var(--main-hover-color);
     background-color: var(--main-hover-color);

@@ -149,7 +149,7 @@ export const TitleWrap = styled.div`
 
   &:first-child {
     word-break: break-word;
-    height: 75%;
+    height: auto;
     border-bottom: none;
 
     @media screen and (max-width: 900px) {

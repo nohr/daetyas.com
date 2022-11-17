@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSnapshot } from "valtio";
-import {
-  handleGetAbout,
-  uploadAbout,
-} from "../../utils/Firebase/Firebase.service";
+import { uploadAbout } from "../../utils/Firebase/Firebase.service";
 import { state } from "../../utils/state";
 
 export default function AboutForm() {
   const snap = useSnapshot(state);
   const [saved, setSaved] = useState(false);
-  useEffect(() => {
-    handleGetAbout();
-  }, []);
+  const [file, setFile] = useState("");
 
   return (
     <div className="formWrap">
@@ -24,7 +19,7 @@ export default function AboutForm() {
         </>
       ) : (
         <div className="about-form">
-          <h1>About</h1>
+          <h1>Info</h1>
           <label htmlFor="about">Text</label>
           <textarea
             name="about"
@@ -37,7 +32,11 @@ export default function AboutForm() {
           ></textarea>
           <br />
           <label htmlFor="file">Photo</label>
-          <input type="file" id="file" />
+          <input
+            type="file"
+            id="file"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
           <br />
           <label htmlFor="email">Email</label>
           <input
@@ -50,7 +49,7 @@ export default function AboutForm() {
           <br />
           <button
             onClick={() => {
-              uploadAbout();
+              uploadAbout(file, snap);
               setSaved(true);
             }}
           >
