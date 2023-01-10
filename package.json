@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^12.8.3",
     "firebase": "^9.6.0",
     "react": "^18.1.0",
-    "react-admin-firebase": "^4.0.5",
     "react-dom": "^18.1.0",
     "react-markdown": "^8.0.3",
     "react-player": "^2.9.0",

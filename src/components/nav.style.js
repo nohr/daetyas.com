@@ -12,10 +12,10 @@ export const Navbar = styled.div`
 
   @media screen and (max-width: 900px) {
     flex-direction: column;
-    height: calc(2 * var(--margin));
+    height: calc( var(--margin));
     width: 100%;
     top: unset;
-    bottom: 0;
+    bottom: 0 !important;
 
     .auth {
       width: 100% !important;
