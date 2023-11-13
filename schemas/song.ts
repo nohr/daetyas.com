@@ -9,7 +9,6 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required(),
     },
     {
       name: "coverImage",
@@ -23,7 +22,6 @@ export default {
       name: "audioFile",
       title: "Audio File",
       type: "file",
-      validation: (Rule) => Rule.required(),
       options: {
         accept: "audio/*",
       },
