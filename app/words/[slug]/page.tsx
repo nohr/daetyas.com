@@ -4,7 +4,7 @@ import { client } from "@/sanity/lib/client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "daetyas | projects",
+  title: "daetyas | words",
   description: "personal website of daetyas",
 };
 
