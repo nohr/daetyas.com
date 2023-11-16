@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "daetyas",
+  title: "daetyas | exhibitions",
   description: "personal website of daetyas",
 };
 
-export default function HomePage() {
+export default function ExhibitionsPage() {
   return <></>;
 }

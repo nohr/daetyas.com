@@ -1,26 +1,28 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "./_components/nav";
 import Footer from "./_components/footer";
+import Grid from "./_components/grid";
+import { BlockType } from "./app";
+import { client } from "@/sanity/lib/client";
 
-const inter = Inter({ subsets: ["latin"] });
+// export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Daetyas",
-  description: "personal website of daetyas",
-};
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const blocks = await client.fetch<BlockType[]>(
+    `*[_type == "project" || _type == "word" || _type == "exhibition"]`
+  );
+
   return (
-    <html lang="en" className="h-[100dvh]">
-      <body className="flex flex-col px-9 h-full bg-slate text-gray">
+    <html lang="en">
+      <body className="flex flex-col h-[100dvh] overscroll-y-none px-9 bg-slate text-gray">
         <Nav />
-        {children}
+        <main className="flex h-full flex-col text-[0px] overflow-y-scroll ">
+          <Grid blocks={blocks}>{children}</Grid>
+        </main>
         <Footer />
       </body>
     </html>

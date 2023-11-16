@@ -1,10 +1,11 @@
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "daetyas",
+  title: "daetyas | words",
   description: "personal website of daetyas",
 };
 
-export default function HomePage() {
+export default function WordsPage() {
   return <></>;
 }

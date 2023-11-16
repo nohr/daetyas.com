@@ -18,6 +18,15 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      keyframes: {
+        autoscroll: {
+          from: { transform: "translate3d(0, 0, 0)" },
+          to: { transform: "translate3d(0, -90%, 0)" },
+        },
+      },
+      animation: {
+        autoscroll: "autoscroll 60s linear infinite",
+      },
     },
   },
   plugins: [],

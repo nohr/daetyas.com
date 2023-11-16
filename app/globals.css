@@ -5,3 +5,9 @@
 :root {
   --margin: 36px;
 }
+
+main::-webkit-scrollbar,
+.desc::-webkit-scrollbar,
+.words::-webkit-scrollbar {
+  display: none;
+}
