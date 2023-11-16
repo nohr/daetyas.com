@@ -6,17 +6,17 @@ export default {
   title: "Project",
   fields: [
     {
+      name: "title",
+      type: "string",
+      title: "Title",
+    },
+    {
       name: "slug",
       type: "slug",
       title: "URL Slug",
       options: {
         source: (docs:any, context: any) => context.parent.title
       }
-    },
-    {
-      name: "title",
-      type: "string",
-      title: "Title",
     },
     {
       name: "year",
