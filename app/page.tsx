@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "daetyas",
-  description: "personal website of daetyas",
+  title: "dae tyas",
+  description: "personal website of dae tyas",
 };
 
 export default function HomePage() {

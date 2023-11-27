@@ -32,7 +32,7 @@ export default function Grid({
               (block) =>
                 (pathname.replace("/", "")
                   ? pathname.includes(block._type)
-                  : true) && <Block key={block._id} data={block} />
+                  : !block._type.includes("exhibition")) && <Block key={block._id} data={block} />
             )}
           </div>
         </div>

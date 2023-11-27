@@ -4,8 +4,8 @@ import { client } from "@/sanity/lib/client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "daetyas | words",
-  description: "personal website of daetyas",
+  title: "dae tyas | words",
+  description: "personal website of dae tyas",
 };
 
 export default async function DocumentPage({ params }: { params: { slug: string } }) {

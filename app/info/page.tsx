@@ -6,8 +6,8 @@ import Image from "next/image";
 import { urlFor } from "../_components/url";
 
 export const metadata: Metadata = {
-  title: "Daetyas | info",
-  description: "personal website of daetyas",
+  title: "dae tyas | info",
+  description: "personal website of dae tyas",
 };
 
 export default async function InfoPage() {
