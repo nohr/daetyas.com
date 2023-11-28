@@ -13,17 +13,23 @@ export const metadata: Metadata = {
 export default async function InfoPage() {
   const info = await client.fetch<InfoType>(`*[_type == "info"][0]`);
 
-  return <div className="flex flex-col text-base">
-    <div className="relative h-60 w-60">
+  return (
+    <div className="flex items-center justify-evenly pt-4 text-base max-md:flex-col">
+      <div className="relative h-96 w-72 border">
+        {info.image && (
           <Image
-            src={ urlFor(info.image).url()}
+            src={urlFor(info.image).url()}
             alt={"me"}
             sizes="100vw, (min-width: 1024px) 33vw, 50vw"
             fill
             suppressHydrationWarning
-            className={`absolute object-cover z-10`}
-      />
+            className={`absolute z-10 object-cover`}
+          />
+        )}
+      </div>
+      <div className="flex max-w-prose flex-col gap-1">
+        <PortableText value={info.text} />
+      </div>
     </div>
-          <PortableText value={info.text} />
-  </div>;
+  );
 }

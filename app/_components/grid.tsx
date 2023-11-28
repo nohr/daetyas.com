@@ -1,4 +1,5 @@
 "use client";
+
 import { BlockType } from "../app";
 import { usePathname } from "next/navigation";
 import Block from "./block";
@@ -7,9 +8,9 @@ export default function Grid({
   children,
   blocks,
 }: {
-    children: React.ReactNode;
-    blocks: BlockType[];
-  }) {
+  children: React.ReactNode;
+  blocks: BlockType[];
+}) {
   const pathname = usePathname();
   const randomBlocks = [...blocks].sort(() => Math.random() - 0.5);
 
@@ -20,12 +21,14 @@ export default function Grid({
       ) : (
         <div>
           {children}
-          <div className="md:columns-[3_200px] columns-[1_200px] h-full w-full ">
+          <div className="h-fit w-full columns-[1_200px] md:columns-[3_200px] ">
             {randomBlocks.map(
               (block) =>
                 (pathname.replace("/", "")
                   ? pathname.includes(block._type)
-                  : !block._type.includes("exhibition")) && <Block key={block._id} data={block} />
+                  : !block._type.includes("exhibition")) && (
+                  <Block key={block._id} data={block} />
+                ),
             )}
           </div>
         </div>

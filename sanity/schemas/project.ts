@@ -15,8 +15,8 @@ export default {
       type: "slug",
       title: "URL Slug",
       options: {
-        source: (docs:any, context: any) => context.parent.title
-      }
+        source: (docs: any, context: any) => context.parent.title,
+      },
     },
     {
       name: "year",
@@ -25,8 +25,9 @@ export default {
     },
     {
       name: "image",
-      type: "image",
-      title: "Image",
+      type: "array",
+      title: "Images",
+      of: [{ type: "image" }],
     },
     {
       name: "text",

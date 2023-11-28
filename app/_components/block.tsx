@@ -33,17 +33,21 @@ export default function Block({ data }: { data: ProjectType | WordType }) {
         {data._type === "project" && (
           <>
             <Image
-              src={data.image ? urlFor(data.image).url() : ""}
+              src={data.image ? urlFor(data.image[0]).url() : ""}
               alt={data.title || ""}
               sizes="100vw, (min-width: 1024px) 33vw, 50vw"
               fill
               suppressHydrationWarning
-              blurDataURL={data.image ? urlFor(data.image).blur(1).url() : ""}
+              blurDataURL={
+                data.image ? urlFor(data.image[0]).blur(1).url() : ""
+              }
               className={`absolute z-10 object-cover hover:opacity-25 ${
                 active ? "opacity-10" : ""
               }`}
             />
-            <h2 className=" text-current p-2 text-3xl">{data.title}</h2>
+            <h2 suppressHydrationWarning className=" text-current p-2 text-3xl">
+              {data.title}
+            </h2>
           </>
         )}
 

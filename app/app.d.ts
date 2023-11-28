@@ -13,7 +13,7 @@ export interface DataType {
 
 export interface ProjectType extends DataType {
   _type: "project";
-  image: SanityImageSource;
+  image: SanityImageSource[];
   title: string;
   year: string;
 }
@@ -24,8 +24,8 @@ export interface WordType extends DataType {
 }
 
 export interface InfoType extends DataType {
-    _type: "info";
-    image: string;
-    }
+  _type: "info";
+  image: string;
+}
 
 export type BlockType = ProjectType | WordType;
