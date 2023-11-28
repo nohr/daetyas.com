@@ -14,7 +14,7 @@ export default async function InfoPage() {
   const info = await client.fetch<InfoType>(`*[_type == "info"][0]`);
 
   return (
-    <div className="flex items-center justify-evenly pt-4 text-base max-md:flex-col">
+    <div className="flex flex-wrap items-center justify-evenly gap-4 pt-4 text-base max-md:flex-col">
       <div className="relative h-96 w-72 border">
         {info.image && (
           <Image
@@ -27,7 +27,7 @@ export default async function InfoPage() {
           />
         )}
       </div>
-      <div className="flex max-w-prose flex-col gap-1">
+      <div className="flex max-w-prose flex-col gap-2">
         <PortableText value={info.text} />
       </div>
     </div>

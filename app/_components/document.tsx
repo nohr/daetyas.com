@@ -15,12 +15,12 @@ export default function Document({ block }: { block: BlockType }) {
         animate={{ height: "calc(66.67vh - 2.25rem)" }}
         exit={{ height: 0 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="flex flex-col border-b text-base md:h-[calc(50vh_-_2.25rem)]  md:flex-row"
+        className="flex h-[calc(50vh)] flex-col border border-t-0 text-base md:h-[calc(50vh_-_2.25rem)] md:flex-row  md:border-x-0"
       >
         {block._type === "project" && (
           <>
-            <div className=" block w-full overflow-x-auto overflow-y-hidden whitespace-nowrap border-r md:w-2/3">
-              {block.image.length > 0 &&
+            <div className=" block h-full w-full overflow-x-auto overflow-y-hidden whitespace-nowrap md:w-2/3 md:border-r">
+              {block.image &&
                 block.image.map((image, index) => (
                   <div
                     className="relative inline-block h-full w-full"
@@ -31,12 +31,12 @@ export default function Document({ block }: { block: BlockType }) {
                       alt={block.title + " " + index}
                       sizes="100vw, (min-width: 1024px) 33vw, 50vw"
                       fill
-                      className=" absolute object-contain"
+                      className=" pointer-events-none absolute select-none object-contain"
                     />
                   </div>
                 ))}
             </div>
-            <div className="flex w-full flex-col justify-between p-2 md:w-1/3">
+            <div className="flex w-full flex-col justify-between px-2 md:w-1/3">
               <h3 className=" text-2xl">{block.title}</h3>
               <div className="desc h-2/3 overflow-y-scroll">
                 <PortableText value={block.text} />

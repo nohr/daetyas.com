@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -28,12 +27,12 @@ const Nav = () => {
     // },
   ];
   const pathname = usePathname();
-  
+
   return (
-    <nav className="flex !h-[36px] z-50 justify-between items-center md:flex-row flex-col-reverse order-3 md:order-1">
+    <nav className="z-50 order-3 flex flex-col-reverse items-center justify-between md:order-1 md:!h-[36px] md:flex-row">
       <Link
         href="/"
-        className="flex h-full border-y-gray border-x-0 border-t-0 md:!border-t border items-center justify-center text-xl hover:bg-green hover:text-slate w-full md:w-1/3 min-[1250px]:w-2/3 hover:border-green duration-100 ease-in-out"
+        className="flex h-full w-full items-center justify-center border border-x-0 border-t-0 border-y-gray text-xl duration-100 ease-in-out hover:border-green hover:bg-green hover:text-slate md:w-1/3 md:!border-t min-[1250px]:w-2/3"
       >
         dae tyas
       </Link>
@@ -42,10 +41,10 @@ const Nav = () => {
           <Link
             key={name}
             href={path}
-            className="flex w-1/4 min-w-fit px-1 items-center justify-center text-xl hover:bg-green hover:text-slate border-y-gray first-of-type:border-l-0 border-r-0 md:!border-l border hover:border-green duration-100 ease-in-out"
+            className="flex w-1/4 min-w-fit items-center justify-center border border-r-0 border-y-gray px-1 text-xl duration-100 ease-in-out first-of-type:border-l-0 hover:border-green hover:bg-green hover:text-slate md:!border-l"
           >
-            {pathname.includes(name) ? ">"
-              : ""}{name}
+            {pathname.includes(name) ? ">" : ""}
+            {name}
           </Link>
         ))}
       </div>
