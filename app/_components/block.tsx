@@ -32,19 +32,21 @@ export default function Block({ data }: { data: ProjectType | WordType }) {
       <Link className="contents" href={`/${data._type}s/${data.slug.current}`}>
         {data._type === "project" && (
           <>
-            <Image
-              src={data.image ? urlFor(data.image[0]).url() : ""}
-              alt={data.title || ""}
-              sizes="100vw, (min-width: 1024px) 33vw, 50vw"
-              fill
-              suppressHydrationWarning
-              blurDataURL={
-                data.image ? urlFor(data.image[0]).blur(1).url() : ""
-              }
-              className={`absolute z-10 object-cover hover:opacity-25 ${
-                active ? "opacity-10" : ""
-              }`}
-            />
+            {data.image ? (
+              <Image
+                src={data.image ? urlFor(data.image[0]).url() : ""}
+                alt={data.title || ""}
+                sizes="100vw, (min-width: 1024px) 33vw, 50vw"
+                fill
+                suppressHydrationWarning
+                blurDataURL={
+                  data.image ? urlFor(data.image[0]).blur(1).url() : ""
+                }
+                className={`absolute z-10 object-cover hover:opacity-25 ${
+                  active ? "opacity-10" : ""
+                }`}
+              />
+            ) : null}
             <h2 suppressHydrationWarning className=" text-current p-2 text-3xl">
               {data.title}
             </h2>
