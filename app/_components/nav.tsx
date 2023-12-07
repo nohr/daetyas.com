@@ -43,8 +43,8 @@ const Nav = () => {
             href={path}
             className="flex w-1/4 min-w-fit items-center justify-center border border-r-0 border-y-gray px-1 text-xl duration-100 ease-in-out first-of-type:border-l-0 hover:border-green hover:bg-green hover:text-slate md:!border-l"
           >
-            {pathname.includes(name) ? ">" : ""}
             {name}
+            {pathname.includes(name) ? "*" : ""}
           </Link>
         ))}
       </div>

@@ -32,7 +32,7 @@ export default function Block({ data }: { data: ProjectType | WordType }) {
       <Link className="contents" href={`/${data._type}s/${data.slug.current}`}>
         {data._type === "project" && (
           <>
-            {data.image[0] ? (
+            {data.image && data.image[0] ? (
               <Image
                 src={urlFor(data.image[0]).url()}
                 alt={data.title || ""}
