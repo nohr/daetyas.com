@@ -4,6 +4,7 @@ import Footer from "./_components/footer";
 import Grid from "./_components/grid";
 import { BlockType } from "./app";
 import { client } from "@/sanity/lib/client";
+import { unstable_noStore } from "next/cache";
 
 // export const dynamic = "force-dynamic";
 
@@ -12,15 +13,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  unstable_noStore();
   const blocks = await client.fetch<BlockType[]>(
-    `*[_type == "project" || _type == "word" || _type == "exhibition"]`
+    `*[_type == "project" || _type == "word" || _type == "exhibition"]`,
   );
 
   return (
     <html lang="en">
-      <body className="flex flex-col h-[100dvh] overscroll-y-none px-9 bg-slate text-gray">
+      <body className="flex h-[100dvh] flex-col overscroll-y-none bg-slate px-9 text-gray">
         <Nav />
-        <main className="flex h-full flex-col order-2 text-[0px] overflow-y-scroll ">
+        <main className="order-2 flex h-full flex-col overflow-y-scroll text-[0px] ">
           <Grid blocks={blocks}>{children}</Grid>
         </main>
         <Footer />

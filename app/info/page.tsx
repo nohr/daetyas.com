@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
-import { BlockType, InfoType } from "../app";
+import { InfoType } from "../app";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { urlFor } from "../_components/url";
+import { unstable_noStore } from "next/cache";
 
 export const metadata: Metadata = {
   title: "dae tyas | info",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function InfoPage() {
+  unstable_noStore();
   const info = await client.fetch<InfoType>(`*[_type == "info"][0]`);
 
   return (

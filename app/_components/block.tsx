@@ -36,7 +36,7 @@ export default function Block({ data }: { data: ProjectType | WordType }) {
               <Image
                 src={urlFor(data.image[0]).url()}
                 alt={data.title || ""}
-                sizes="100vw, (min-width: 1024px) 33vw, 50vw"
+                sizes="33vw, (min-width: 1024px) 33vw, 50vw"
                 fill
                 suppressHydrationWarning
                 blurDataURL={urlFor(data.image[0]).blur(1).url()}
