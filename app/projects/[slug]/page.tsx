@@ -13,8 +13,6 @@ export default async function DocumentPage({
 }: {
   params: { slug: string };
 }) {
-  // console.log(params.slug);
-
   const block = await client.fetch<BlockType>(`*[slug.current == $slug][0]`, {
     slug: params.slug,
   });
