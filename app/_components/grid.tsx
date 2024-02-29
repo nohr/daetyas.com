@@ -2,7 +2,9 @@
 
 import { BlockType } from "../app";
 import { usePathname } from "next/navigation";
-import Block from "./block";
+import dynamic from "next/dynamic";
+
+const Block = dynamic(() => import("./block"), { ssr: false });
 
 export default function Grid({
   children,

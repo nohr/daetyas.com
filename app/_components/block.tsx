@@ -20,6 +20,7 @@ export default function Block({ data }: { data: ProjectType | WordType }) {
 
   return (
     <motion.div
+      suppressHydrationWarning
       whileInView={{ height: randomHeight() }}
       viewport={{
         once: true,
