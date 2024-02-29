@@ -30,7 +30,10 @@ export default function Block({ data }: { data: ProjectType | WordType }) {
         data._type !== "project" && " !inline-block border"
       } ${active ? "pointer-events-none border" : ""}`}
     >
-      <Link className="contents" href={`/${data._type}s/${data.slug.current}`}>
+      <Link
+        className="relative contents"
+        href={`/${data._type}s/${data.slug.current}`}
+      >
         {data._type === "project" && (
           <>
             {data.image && data.image[0] ? (
@@ -39,6 +42,7 @@ export default function Block({ data }: { data: ProjectType | WordType }) {
                 alt={data.title || ""}
                 sizes="33vw, (min-width: 1024px) 33vw, 50vw"
                 fill
+                priority
                 suppressHydrationWarning
                 blurDataURL={urlFor(data.image[0]).blur(1).url()}
                 className={`absolute z-10 object-cover hover:opacity-25 ${
