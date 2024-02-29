@@ -24,6 +24,7 @@ export default async function InfoPage() {
             alt={"me"}
             sizes="100vw, (min-width: 1024px) 33vw, 50vw"
             fill
+            priority
             suppressHydrationWarning
             className={`absolute z-10 object-cover`}
           />
