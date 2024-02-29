@@ -7,13 +7,27 @@ import { ProjectType, WordType } from "../app";
 import { PortableText } from "@portabletext/react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function Block({ data }: { data: ProjectType | WordType }) {
   const blockRef = useRef<HTMLDivElement>(null!);
+  const [mod, setMod] = useState([200, 250]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setMod([100, 60]);
+      } else {
+        setMod([200, 250]);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const randomHeight = useCallback(
-    () => `${Math.floor(Math.random() * 200) + 250}px`,
-    [],
+    () => `${Math.floor(Math.random() * mod[0]) + mod[1]}px`,
+    [mod],
   );
   const pathname = usePathname();
   const active = pathname.includes(data.slug.current);
@@ -50,7 +64,10 @@ export default function Block({ data }: { data: ProjectType | WordType }) {
                 }`}
               />
             ) : null}
-            <h2 suppressHydrationWarning className=" text-current p-2 text-3xl">
+            <h2
+              suppressHydrationWarning
+              className=" text-current p-2 text-lg md:text-3xl"
+            >
               {data.title}
             </h2>
           </>
@@ -66,7 +83,7 @@ export default function Block({ data }: { data: ProjectType | WordType }) {
               e.stopPropagation();
               e.preventDefault();
             }}
-            className={`words animate-autoscroll overflow-y-scroll text-4xl hover:opacity-25 [&_>_p]:pointer-events-none ${
+            className={`words animate-autoscroll overflow-y-scroll text-lg hover:opacity-25 md:text-4xl [&_>_p]:pointer-events-none ${
               active ? "opacity-10" : ""
             }`}
           >

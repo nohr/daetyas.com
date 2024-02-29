@@ -20,7 +20,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="flex h-[100dvh] flex-col overscroll-y-none bg-slate px-9 text-gray">
+      <body className="flex h-[100dvh] flex-col overscroll-y-none bg-slate text-gray md:px-9">
         <Nav />
         <main className="order-2 flex h-full flex-col overflow-y-scroll text-[0px] ">
           <Grid blocks={blocks}>{children}</Grid>
