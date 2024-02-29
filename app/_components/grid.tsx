@@ -23,7 +23,7 @@ export default function Grid({
       ) : (
         <div>
           {children}
-          <div className="h-fit w-full columns-[1_200px] md:columns-[3_200px] ">
+          <div className="h-fit w-full columns-[3_125px] md:columns-[3_200px] ">
             {randomBlocks.map(
               (block) =>
                 (pathname.replace("/", "")
