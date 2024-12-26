@@ -1,7 +1,7 @@
 "use client";
 
-import { PortableText } from "@portabletext/react";
-import { BlockType, ProjectType } from "../app";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
+import { BlockType } from "../app";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { urlFor } from "./url";
@@ -48,8 +48,10 @@ export default function Document({ block }: { block: BlockType }) {
           <>
             <div className="flex w-full flex-row justify-start">
               <h3 className=" w-1/3 border-r text-2xl">{block.title}</h3>
-              <div className={`desc overflow-y-scroll p-2 md:w-2/3`}>
-                <PortableText value={block.text} />
+              <div
+                className={`desc overflow-y-scroll p-2 leading-relaxed md:w-2/3 [&_*]:mb-2 [&_*]:min-h-[2ch] `}
+              >
+                <PortableText value={block.text} components={components} />
               </div>
             </div>
           </>
@@ -58,3 +60,30 @@ export default function Document({ block }: { block: BlockType }) {
     </AnimatePresence>
   );
 }
+
+const components: PortableTextComponents = {
+  block: {
+    h2: ({ children }) => (
+      <h2 className="!text-[2.0625rem] !font-bold">{children}</h2>
+    ),
+  },
+  marks: {
+    em: ({ children }) => <em className="text-gray-600 ">{children}</em>,
+
+    link: ({ value, children }) => {
+      const target = (value?.href || "").startsWith("http")
+        ? "_blank"
+        : undefined;
+      return (
+        <a
+          href={value?.href}
+          target={target}
+          className="underline hover:text-[#00c49a]"
+          rel={target === "_blank" ? "noindex nofollow" : ""}
+        >
+          {children}
+        </a>
+      );
+    },
+  },
+};
