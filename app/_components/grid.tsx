@@ -18,7 +18,9 @@ export default function Grid({
 
   return (
     <>
-      {pathname.includes("info") || pathname.includes("studio") ? (
+      {pathname.includes("info") ||
+      pathname.includes("studio") ||
+      pathname.includes("words/") ? (
         children
       ) : (
         <div>

@@ -83,7 +83,7 @@ export default function Block({ data }: { data: ProjectType | WordType }) {
               e.stopPropagation();
               e.preventDefault();
             }}
-            className={`words animate-autoscroll overflow-y-scroll text-lg hover:opacity-25 md:text-4xl [&_>_p]:pointer-events-none ${
+            className={`words animate-autoscroll overflow-y-scroll text-lg hover:opacity-25 md:text-4xl [&_>_*]:pointer-events-none ${
               active ? "opacity-10" : ""
             }`}
           >

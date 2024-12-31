@@ -25,7 +25,7 @@ const config: Config = {
         },
       },
       animation: {
-        autoscroll: "autoscroll 60s linear infinite",
+        autoscroll: "autoscroll 130s linear infinite",
       },
     },
   },

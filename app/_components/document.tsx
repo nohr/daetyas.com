@@ -5,17 +5,28 @@ import { BlockType } from "../app";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { urlFor } from "./url";
+import { useScreen } from "./hooks";
+import { usePathname } from "next/navigation";
 
 export default function Document({ block }: { block: BlockType }) {
+  const isMobile = useScreen();
+  const isWordDocument = usePathname().includes("words/");
+
   return (
     <AnimatePresence>
       <motion.section
         key={block._id}
         initial={{ height: 0 }}
-        animate={{ height: "calc(66.67vh - 2.25rem)" }}
+        animate={{
+          height:
+            (isMobile && isWordDocument) || isWordDocument
+              ? "100%"
+              : "calc(66.67vh - 2.25rem)",
+        }}
         exit={{ height: 0 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
         className="flex h-[calc(50vh)] flex-col border border-t-0 text-base md:h-[calc(50vh_-_2.25rem)] md:flex-row  md:border-x-0"
+        style={isMobile && isWordDocument ? { overflowY: "scroll" } : undefined}
       >
         {block._type === "project" && (
           <>
@@ -37,7 +48,7 @@ export default function Document({ block }: { block: BlockType }) {
                 ))}
             </div>
             <div className="flex w-full flex-col justify-between px-2 md:w-1/3">
-              <h3 className=" text-2xl">{block.title}</h3>
+              <h3 className=" text-xl md:text-2xl">{block.title}</h3>
               <div className="desc h-2/3 overflow-y-scroll">
                 <PortableText value={block.text} />
               </div>
@@ -49,7 +60,7 @@ export default function Document({ block }: { block: BlockType }) {
             <div className="flex w-full flex-row justify-start">
               <h3 className=" w-1/3 border-r text-2xl">{block.title}</h3>
               <div
-                className={`desc overflow-y-scroll p-2 leading-relaxed md:w-2/3 [&_*]:mb-2 [&_*]:min-h-[2ch] `}
+                className={`desc h-full overflow-y-scroll p-2 leading-relaxed md:w-2/3 [&_*]:mb-2 [&_*]:min-h-[2ch] `}
               >
                 <PortableText value={block.text} components={components} />
               </div>
